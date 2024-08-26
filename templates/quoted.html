@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Display Quote
+{% endblock %}
+
+{% block main %}
+<div class="section">
+
+    <table class="table table-striped">
+        <tbody>
+
+                <tr>
+                    <td>{{ info_quote["name"] }}'s stock is currently trading at {{ info_quote["price"] | usd }} per share.</td> <!--row.name would also work to access the data-->  <!--To format a value as a US dollar value (with cents listed to two decimal places),
+                                    you can use the usd filter in your Jinja templates (printing values as { value | usd } instead of { value }-->
+                </tr>
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

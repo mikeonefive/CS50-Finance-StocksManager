@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+<div class="section">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Stocks</th>
+                <th>Number of Shares</th>
+                <th>Price per Share</th>
+                <th>Total</th>
+                <th>Type of Transaction</th>
+                <th>Date and Time</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+
+                <tr>
+                        <td>{{ transaction["stock_symbol"]  }}</td>
+
+                    {% if transaction["shares"] < 0 %}
+                        <td>{{ -transaction["shares"]  }}</td>
+                        <td>{{ transaction["price"] | usd }}</td>
+                        <td>{{ -(transaction["shares"] * transaction["price"]) | usd }}</td>
+                        <td style="color:red;">Sale</td>
+                        <td>{{ transaction["time"] }}</td>
+
+                    {% else %}
+                        <td>{{ transaction["shares"]  }}</td>
+                        <td>{{ transaction["price"] | usd }}</td>
+                        <td>{{ (transaction["shares"] * transaction["price"]) | usd }}</td>
+                        <td style="color:green;">Purchase</td>
+                        <td>{{ transaction["time"] }}</td>
+
+                    {% endif %}
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}
